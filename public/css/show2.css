@@ -1,0 +1,31 @@
+body{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+}
+.cart-cars{
+    float: left;
+    padding: 30px;
+}
+.cart-content{
+    text-align: center;
+}
+.img{
+    width: 400px;
+    height: 300px;
+}
+.button {
+    z-index: 1;
+    border-radius: 10px;
+    padding: 13px 27px;
+    border-width: 0px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: #4CAF50;
+    color: white;
+    font-size: 17px;
+    transition: opacity 0.3s;
+  }
+.button:hover {
+      opacity: 0.7;
+      cursor: pointer;
+  }
