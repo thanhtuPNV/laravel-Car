@@ -34,7 +34,7 @@ Route::resource('cars', CarController::class);
 // Route::get('Detail/{id}', [CarController::class, "detail"]);
 Route::get('{id}/Edit', [CarController::class, "edit"]);
 Route::post('/Update/{id}', [CarController::class, "update"]);
-// Route::get('/Delete/{id}', [CarController::class, "delete"]);
+Route::get('/Delete/{id}', [CarController::class, "delete"]);
 Route::get("/Create", [CarController::class, "create"]);
 Route::post("/Store", [CarController::class, "store"]);
 

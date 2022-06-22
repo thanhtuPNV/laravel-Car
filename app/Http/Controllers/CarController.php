@@ -40,12 +40,71 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $model = $request->input("model");
-        $price = $request->input("price");
+        // $name ='';
+        // dd($request->hasfile('image'));
+        // if ($request->hasfile('image')){
+
+        //     $this ->validate($request,[
+        //         'image' =>'mimes:jpg,png,gif,jpeg|max:4000'
+        //     ],[
+        //         'image.mimes'=>'chi chap nhan file hinh anh',
+        //         'image.max'=>'chi chap nhan file hinh anh duoi 2MB'
+        //     ]);
+        //     $file = $request->file('image');
+        //     $name = time().'_'.$file->getClientOriginalName();
+        //     $destinationPath = public_path('image');
+
+        //     $file->move($destinationPath,$name);
+        // }
+
+        $validated = $request->validate([
+            'name'=>'required',
+            'decriptions'=>'required',
+            'price'=>'required|integer',
+            'image'=>'required',
+        ],$this->message());
+
+        $name = $request->input("name");
+        $decriptions = $request->input("decriptions");
         $image = $request->input("image");
-        Car::insert(compact('model','price','image'));
-        return redirect("/");
+        $price = $request->input("price");
+        Car::insert(compact('name','decriptions','image','price'));
+        return redirect("/cars")->with('status','Create success!');
     }
+
+    // message
+    public function message()
+    {
+        return [
+            'name.required' => 'Name bắt buộc phải nhập!',
+            'decriptions.required' => 'Decriptions bắt buộc phải nhập!',
+            'price.required' => 'Price bắt buộc phải nhập!',
+            'image.required' => 'Image bắt buộc phải chọn!',
+            'price.integer' => 'Price phải là số!',
+        ];
+    }
+    // message
+
+    //sdfsdf
+    // public function store(Request $request)
+    // {
+    //     //lưu
+
+
+
+    //     $car= new Car();
+    //     $car -> description = $request->description;
+    //     $car -> make = $request->make;
+    //     $car -> model = $request->model;
+    //     $car -> image = $name;
+    //     $car -> produced_on = $request->produced_on;
+    //     $car->save();
+
+
+
+    //     return redirect()->route('cars.index')->with('thành công', 'bạn đã cập nhật thành công');
+    // }
+    //asdfsd
 
     /**
      * Display the specified resource.
@@ -81,11 +140,19 @@ class CarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $model = $request->input("model");
-        $price = (float)$request->input("price");
+        $validated = $request->validate([
+            'name'=>'required',
+            'decriptions'=>'required',
+            'price'=>'required|integer',
+            'image'=>'required',
+        ],$this->message());
+
+        $name = $request->input("name");
+        $decriptions = $request->input("decriptions");
         $image = $request->input("image");
-        Product::where("id", $id)->update(compact('model', 'price', 'image'));
-        return redirect("/");   
+        $price = (integer)$request->input("price");
+        Car::where("id", $id)->update(compact('name','decriptions','image','price'));
+        return redirect("/cars")->with('status','Update success');
     }
 
     /**
@@ -94,8 +161,9 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        Car::where('id', $id)->delete();
+        return redirect("/cars")->with('status','Delete success');
     }
 }

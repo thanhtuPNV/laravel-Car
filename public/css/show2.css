@@ -7,6 +7,9 @@ body{
     float: left;
     padding: 30px;
 }
+.Create{
+    padding: 30px;
+}
 .cart-content{
     text-align: center;
 }

@@ -12,15 +12,25 @@
     <title>Document</title>
 </head>
 <body>
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+<div class="Create">
+    <a role="button" href="/Create" class="btn btn-primary" onclick="return confirm('Bạn có muốn thêm mới!')">Create</a>
+</div>
 @foreach($cars as $car)
     <div class="cart-cars">
         <div class="">
             <img class="img" src="/image/{{ $car->image }}" alt="...">
         </div>
         <div class="cart-content">
-            <p>{{ $car->model }}</p>
+            <p>{{ $car->name }}</p>
             <p>Price: {{ $car->price }}</p>
             <button class="button">Buy Now</button>
+            <a href="/{{$car["id"]}}/Edit" role="button" class="btn btn-primary" onclick="return confirm('Bạn có muốn sửa!')">Edit</a>
+            <a href="/Delete/{{$car["id"]}}" role="button" class="btn btn-danger mt-2" onclick="return confirm('Bạn có muốn xóa!')">Delete</a>
         </div>
     </div>
 @endforeach
