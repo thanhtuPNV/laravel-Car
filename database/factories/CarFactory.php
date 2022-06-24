@@ -18,9 +18,10 @@ class CarFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'price' => $this->faker->name(),
+            'price' => rand(1,999)."000000",
             'decriptions' => $this->faker->name(),
             'image' => $this->faker->name(),
+            'mf_id' => rand(6,10),
         ];
     }
 }

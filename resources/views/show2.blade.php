@@ -19,6 +19,12 @@
 @endif
 <div class="Create">
     <a role="button" href="/Create" class="btn btn-primary" onclick="return confirm('Bạn có muốn thêm mới!')">Create</a>
+    <select name="manufactures" id="manufactures">
+        @foreach($cars as $car)
+            <option value="{{ $car->mf->id }}">{{ $car->mf->mf_name }}</option>
+        @endforeach
+    </select>
+    <!-- <input type="radio" value="{{ $car->mf->mf_name }}">{{ $car->mf->mf_name }} -->
 </div>
 @foreach($cars as $car)
     <div class="cart-cars">
@@ -28,6 +34,7 @@
         <div class="cart-content">
             <p>{{ $car->name }}</p>
             <p>Price: {{ $car->price }}</p>
+            <p>Manufacture: {{ $car->mf->mf_name }}</p>
             <button class="button">Buy Now</button>
             <a href="/{{$car["id"]}}/Edit" role="button" class="btn btn-primary" onclick="return confirm('Bạn có muốn sửa!')">Edit</a>
             <a href="/Delete/{{$car["id"]}}" role="button" class="btn btn-danger mt-2" onclick="return confirm('Bạn có muốn xóa!')">Delete</a>

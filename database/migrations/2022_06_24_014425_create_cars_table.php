@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('make');
-            $table->string('model');
-            $table->string('produced_on');
-            $table->timestamps();
+            $table->string('name');
+            $table->string('decriptions');
             $table->string('image');
             $table->integer('price');
+            $table->unsignedInteger('mf_id');
+            $table->foreign('mf_id')->references('id')->on('manufactures')->onUpdate('cascade')->onDelete('cascade');
         });
         // Schema::table('cars', function (Blueprint $table) {
         //     $table->integer('price');

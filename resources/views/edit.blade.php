@@ -27,6 +27,23 @@
         @csrf
         <!-- @method('put') -->
             <div class="row">
+                <label class="col-3" for="name">Manufactures:</label>
+                <select class="col form-control" name="manufactures" id="manufactures">
+
+                    @isset($manufactures)
+                    <!-- <option>fffffffffffffff</option> -->
+
+                        @foreach($manufactures as $mfs)
+                            <option
+                            {{ isset($car) && $car->mf_id === $mfs->id ? 'selected' : "" }}
+                                value="{{ $mfs->id }}">
+                                {{ $mfs->mf_name }}
+                            </option>
+                        @endforeach
+                    @endisset
+                </select>
+            </div>
+            <div class="row mt-3">
                 <label class="col-3" for="name">Name:</label>
                 <input type="text" class="col form-control" name="name" value="{{isset($car) ? $car["name"] : ""}}">
             </div>

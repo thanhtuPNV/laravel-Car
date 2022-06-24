@@ -18,10 +18,12 @@ class CarSeeder extends Seeder
     public function run()
     {
         // DB::table('cars')->insert([
-        //     'make' => Str::random(10),
-        //     'model' => Str::random(10),
-        //     'produced_on' => Carbon::parse('6/8/2022'),
+        //     'name' => Str::random(10),
+        //     'decriptions' => Str::random(10),
+        //     'price' => Str::random(10),
+        //     'mf_id' => Str::random(10),
+        //     // 'produced_on' => Carbon::parse('6/8/2022'),
         // ]);
-        // Car::factory()->count(5)->create();
+        Car::factory()->count(5)->create();
     }
 }

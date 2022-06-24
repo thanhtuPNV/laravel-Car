@@ -9,6 +9,8 @@ body{
 }
 .Create{
     padding: 30px;
+    display: flex;
+    justify-content: space-between;
 }
 .cart-content{
     text-align: center;

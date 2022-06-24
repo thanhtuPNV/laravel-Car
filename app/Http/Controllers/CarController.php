@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Models\Manufacture;
 
 
 class CarController extends Controller
@@ -22,6 +23,41 @@ class CarController extends Controller
         return view('show2',['cars'=>$cars]);
     }
 
+    public function index_Manufacture($id)
+    {
+        if ($id == -1){
+            $car = Car::all();
+            $manufactures = Manufacture::all();
+            return view('show2',compact('car','manufactures'));
+        }
+        else{
+            $manufactures = Manufacture::all();
+            $manufactures = Manufacture::findOrFail($id);
+            $car = $Manufactures->cars()->get();
+            return view('show2',compact('car','manufactures'));
+        }
+        // $Manufactures = index_Manufacture::get();
+        // return view('show2',['Manufactures'=>$Manufactures]);
+    }
+
+    //
+    // public function index_producer($id){
+    //     if($id==-1){
+    //         $cars = Car::all(); //1.b
+    //         $pros = \App\Models\Producer::all(); //1.bx`
+    //         return view('showAll',compact('cars','pros'));
+    //     }
+    //     else{
+    //         $pros = \App\Models\Producer::all();
+    //         $pro = \App\Models\Producer::findOrFail($id); //1.b
+    //         // dd($pro);
+    //         $cars = $pro->cars()->get();
+    //         return view('showAll',compact('cars','pros'));
+    //     }
+
+    // }
+    //
+
     /**
      * Show the form for creating a new resource.
      *
@@ -29,7 +65,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view("edit", ["action" => "create"]);
+        $manufactures = Manufacture::all();
+        return view("edit", ["action" => "create", "manufactures" => "manufactures"]);
     }
 
     /**
@@ -68,7 +105,8 @@ class CarController extends Controller
         $decriptions = $request->input("decriptions");
         $image = $request->input("image");
         $price = $request->input("price");
-        Car::insert(compact('name','decriptions','image','price'));
+        $manufactures = $request->input("manufactures");
+        Car::insert(compact('name','decriptions','image','price','manufactures'));
         return redirect("/cars")->with('status','Create success!');
     }
 
@@ -128,7 +166,8 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-        return view("edit", ["car" => Car::find($id), "action" => "update"]);
+        $manufactures = Manufacture::all();
+        return view("edit", ["car" => Car::find($id), "action" => "update", "manufactures" => "manufactures"]);
     }
 
     /**
@@ -151,7 +190,8 @@ class CarController extends Controller
         $decriptions = $request->input("decriptions");
         $image = $request->input("image");
         $price = (integer)$request->input("price");
-        Car::where("id", $id)->update(compact('name','decriptions','image','price'));
+        $manufactures = $request->input("manufactures");
+        Car::where("id", $id)->update(compact('name','decriptions','image','price','manufactures'));
         return redirect("/cars")->with('status','Update success');
     }
 
