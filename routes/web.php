@@ -64,4 +64,4 @@ Route::get('caculator', function(){
 // })->name('ptb1.post');
 // Route::post('ptb1', [GiaiController::class,'giaiptb1'])->name('ptb1.post');
 // Route::get('ptb11', [GiaiController::class,'giaiptb1'])->name('ptb11.get');
-Route::get('caculator', [GiaiController::class,'caculator'])->name('caculator.get');
+// Route::get('caculator', [GiaiController::class,'caculator'])->name('caculator.get');

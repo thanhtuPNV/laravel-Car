@@ -66,7 +66,7 @@ class CarController extends Controller
     public function create()
     {
         $manufactures = Manufacture::all();
-        return view("edit", ["action" => "create", "manufactures" => "manufactures"]);
+        return view("edit", ["action" => "create"],compact('manufactures'));
     }
 
     /**
@@ -105,8 +105,8 @@ class CarController extends Controller
         $decriptions = $request->input("decriptions");
         $image = $request->input("image");
         $price = $request->input("price");
-        $manufactures = $request->input("manufactures");
-        Car::insert(compact('name','decriptions','image','price','manufactures'));
+        $mf_id = $request->input("manufactures");
+        Car::insert(compact('name','decriptions','image','price','mf_id'));
         return redirect("/cars")->with('status','Create success!');
     }
 
@@ -167,7 +167,7 @@ class CarController extends Controller
     public function edit($id)
     {
         $manufactures = Manufacture::all();
-        return view("edit", ["car" => Car::find($id), "action" => "update", "manufactures" => "manufactures"]);
+        return view("edit", ["car" => Car::find($id), "action" => "update"],compact('manufactures'));
     }
 
     /**
@@ -190,8 +190,8 @@ class CarController extends Controller
         $decriptions = $request->input("decriptions");
         $image = $request->input("image");
         $price = (integer)$request->input("price");
-        $manufactures = $request->input("manufactures");
-        Car::where("id", $id)->update(compact('name','decriptions','image','price','manufactures'));
+        $mf_id = $request->input("manufactures");
+        Car::where("id", $id)->update(compact('name','decriptions','image','price','mf_id'));
         return redirect("/cars")->with('status','Update success');
     }
 

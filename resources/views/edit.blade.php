@@ -35,7 +35,7 @@
 
                         @foreach($manufactures as $mfs)
                             <option
-                            {{ isset($car) && $car->mf_id === $mfs->id ? 'selected' : "" }}
+                                {{ isset($car) && $car->mf_id === $mfs->id ? 'selected' : "" }}
                                 value="{{ $mfs->id }}">
                                 {{ $mfs->mf_name }}
                             </option>
